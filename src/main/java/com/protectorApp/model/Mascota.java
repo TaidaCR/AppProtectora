@@ -11,6 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -20,12 +21,12 @@ public class Mascota {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
 	private String nombre;
 	
+	@Column (name="fecha_nac")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date fecha;
+	private Date fechaNac;
 	
 	private String raza;
 	private Double peso;
@@ -44,11 +45,11 @@ public class Mascota {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Date getfecha() {
-		return fecha;
+	public Date getfechaNac() {
+		return fechaNac;
 	}
-	public void setfecha(Date fecha) {
-		this.fecha = fecha;
+	public void setfechaNac(Date fechaNac) {
+		this.fechaNac = fechaNac;
 	}
 	public String getRaza() {
 		return raza;
@@ -74,6 +75,4 @@ public class Mascota {
 	public void setUrl_foto(String url_foto) {
 		this.url_foto = url_foto;
 	}	
-	
-	
 }

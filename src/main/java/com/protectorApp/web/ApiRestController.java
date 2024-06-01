@@ -29,7 +29,6 @@ public class ApiRestController {
 	private MascotaRepository mascotaRepo;
 	
 	@GetMapping("/mascota/{id}")
-	//añadir luego el ResponseEntity
 	public ResponseEntity <Mascota> MascotaById (@PathVariable ("id") Long id){
 		Optional <Mascota> optMascota = mascotaRepo.findById(id);
 		if (optMascota.isPresent()) {
@@ -52,13 +51,13 @@ public class ApiRestController {
 	
 	@GetMapping ("/mascota/20")
 	private Iterable <Mascota> listar20Jovenes(){
-		PageRequest pageable = PageRequest.of(0, 20, Sort.by("fecha").ascending());
+		PageRequest pageable = PageRequest.of(0, 20, Sort.by("fechaNac").ascending());
 		return mascotaRepo.findAll(pageable);
 	}
 	
-	@GetMapping("/mascota/por5")
-	public Iterable <Mascota> listarPor5() {
-	    PageRequest pageable = PageRequest.of(0, 5, Sort.by("fecha").ascending());
+	@GetMapping("/mascota/por5/{pag}")
+	public Iterable <Mascota> listarPor5(@PathVariable ("pag") int pag) {
+	    PageRequest pageable = PageRequest.of(pag, 5);
 	    return mascotaRepo.findAll(pageable);
 	}	
 	
@@ -68,8 +67,11 @@ public class ApiRestController {
 	}
 	
 	@GetMapping("/mascotaNombre/{nombre}")
-	//añadir luego el ResponseEntity
-	public Optional<Mascota> MascotaByNombre (@PathVariable ("nombre") String nombre){
-		return mascotaRepo.findByNombre(nombre);
+	public ResponseEntity <Mascota> MascotaByNombre (@PathVariable ("nombre") String nombre){
+		Optional <Mascota> optMascota = mascotaRepo.findByNombre(nombre);
+		if (optMascota.isPresent()) {
+			return new ResponseEntity <> (optMascota.get(), HttpStatus.OK);
+		}
+		return new ResponseEntity <> (null, HttpStatus.NOT_FOUND);
 	}
 }

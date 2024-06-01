@@ -28,7 +28,7 @@ public class SwaggerConfig {
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
 				.title("App para manejar datos animales protectoras")
-				.description("Para obtener detalles mas alla de lo que exhibe esta API contactar con nosotros")
+				.description("Para obtener detalles mas alla de lo que exhibe esta API contactar al correo que aparece debajo")
 				.termsOfServiceUrl("https://github.com/TaidaCR/ProyectoFinal")
 				.contact(new Contact("Taida Carmona", "www.taida.com", "taidacrm@gmail.com"))
 				.build();
